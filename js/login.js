@@ -3,7 +3,7 @@ function alertaEmail() {
     document.getElementById("email").style.borderColor = "red";
 }
 function alertaContrasena() {
-    document.getElementById("pass0").innerHTML = `Ingresa tu e-mail`;
+    document.getElementById("pass0").innerHTML = `Ingresa tu contraseña`;
     document.getElementById("contrasena").style.borderColor = "red";
 }
 
