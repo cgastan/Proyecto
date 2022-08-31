@@ -22,7 +22,9 @@ document.addEventListener("DOMContentLoaded", function () {
             alertaContrasena();
         }
         if (datosCompletos) {
+            localStorage.setItem("usuarioMail", email);
             window.location = "portada.html";
         }
     })
 })
+

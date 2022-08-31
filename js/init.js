@@ -39,3 +39,12 @@ let getJSONData = function(url){
         return result;
     });
 }
+
+document.addEventListener("DOMContentLoaded", function(){
+var uMail= localStorage.getItem("usuarioMail");
+  
+    const mailDeUsuario = document.getElementsByClassName("us1");
+for (let i = 0; i < mailDeUsuario.length; i++) {
+  mailDeUsuario[i].innerHTML = uMail;
+}
+});
