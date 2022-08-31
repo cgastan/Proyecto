@@ -1,5 +1,5 @@
+const PRODUCT_URL= PRODUCTS_URL.valueOf()+ localStorage.getItem("catID")+ ".json"
 let currentProductsArray = [];
-const AUTOS_URL="https://japceibal.github.io/emercado-api/cats_products/101.json"
 function showProductsList(array) {
     let htmlContentToAppend = "";
     for(let product of array.products){
@@ -25,14 +25,14 @@ function showProductsList(array) {
     
         `
         document.getElementById("productos").innerHTML = htmlContentToAppend;
-
     }
+    document.getElementById("nomCat").innerHTML+= ` ${array.catName}.`
 }
 
 
 
 document.addEventListener("DOMContentLoaded", function (e) {
-    getJSONData(AUTOS_URL).then(function (resultObj) {
+    getJSONData(PRODUCT_URL).then(function (resultObj) {
         if (resultObj.status === "ok") {
             currentProductsArray = resultObj.data;
             showProductsList(currentProductsArray);
