@@ -34,7 +34,7 @@ function showProductsList(array) {
             document.getElementById("productos").innerHTML = htmlContentToAppend;
         }
     }
-    document.getElementById("nomCat").innerHTML += ` ${array.catName}.`
+    document.getElementById("nomCat").innerHTML = `Verás aquí todos los productos de la categoría ${array.catName}.`
 }
 
 
