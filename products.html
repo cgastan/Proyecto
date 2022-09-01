@@ -38,10 +38,45 @@
     </div>
   </nav>
   <main class="pb-5 container">
+    
     <div class="text-center p-4">
       <h2>Productos</h2>
       <p class="lead" id="nomCat">Verás aquí todos los productos de la categoría</p>
     </div>
+    <div class="container">
+      <div class="row">
+        <div class="col text-end">
+          <div class="btn-group btn-group-toggle mb-4" data-bs-toggle="buttons">
+            <input type="radio" class="btn-check" name="options" id="sortByPriceDesc" checked>
+            <label class="btn btn-light" for="sortByPriceDesc"><i class="fas fa-sort-amount-down mr-1"></i>$</label>
+            <input type="radio" class="btn-check" name="options" id="sortByPriceAsc" checked>
+            <label class="btn btn-light" for="sortByPriceAsc"><i class="fas fa-sort-amount-up mr-1"></i>$</label>
+            <input type="radio" class="btn-check" name="options" id="sortBySoldCount" checked>
+            <label class="btn btn-light" for="sortBySoldCount"><i class="fas fa-sort-amount-down mr-1"></i>Rel</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-6 offset-lg-6 col-md-12 mb-1 container">
+          <div class="row container p-0 m-0">
+            <div class="col">
+              <p class="font-weight-normal text-end my-2">Precio.</p>
+            </div>
+            <div class="col">
+              <input class="form-control" type="number" placeholder="min." id="rangeFilterCountMinProd">
+            </div>
+            <div class="col">
+              <input class="form-control" type="number" placeholder="máx." id="rangeFilterCountMaxProd">
+            </div>
+            <div class="col-3 p-0">
+              <div class="btn-group" role="group">
+                <button class="btn btn-light btn-block" id="rangeFilterCountProd">Filtrar</button>
+                <button class="btn btn-link btn-sm" id="clearRangeFilterProd">Limpiar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     <div id="productos" class="container">
      
     </div>

@@ -1,9 +1,16 @@
-const PRODUCT_URL= PRODUCTS_URL.valueOf()+ localStorage.getItem("catID")+ ".json"
+const PRODUCT_URL = PRODUCTS_URL.valueOf() + localStorage.getItem("catID") + ".json"
 let currentProductsArray = [];
+let min = undefined;
+let max = undefined;
+
 function showProductsList(array) {
     let htmlContentToAppend = "";
-    for(let product of array.products){
-        htmlContentToAppend += `
+    for (let product of array.products) {
+        product.cost = parseInt(product.cost);
+
+        if ((min == undefined && max == undefined) || (product.cost >= min && product.cost <= max) || (product.cost >= min && max == undefined) || (min == undefined && product.cost <= max)) {
+
+            htmlContentToAppend += `
       
     <div class="list-group-item list-group-item-action">
             <div class="row">
@@ -24,9 +31,10 @@ function showProductsList(array) {
         </div>
     
         `
-        document.getElementById("productos").innerHTML = htmlContentToAppend;
+            document.getElementById("productos").innerHTML = htmlContentToAppend;
+        }
     }
-    document.getElementById("nomCat").innerHTML+= ` ${array.catName}.`
+    document.getElementById("nomCat").innerHTML += ` ${array.catName}.`
 }
 
 
@@ -38,8 +46,41 @@ document.addEventListener("DOMContentLoaded", function (e) {
             showProductsList(currentProductsArray);
         }
     });
+
 });
 
 
+document.getElementById("rangeFilterCountProd").addEventListener("click", function () {
 
+    min = document.getElementById("rangeFilterCountMinProd").value;
+    max = document.getElementById("rangeFilterCountMaxProd").value;
 
+    if ((min != undefined) && (min != "") && (parseInt(min)) >= 0) {
+        min = parseInt(min);
+    }
+    else {
+        min = undefined;
+    }
+
+    if ((max != undefined) && (max != "") && (parseInt(max)) >= 0) {
+        max = parseInt(max);
+    }
+    else {
+        max = undefined;
+    }
+    showProductsList(currentProductsArray);
+});
+
+document.getElementById("clearRangeFilterProd").addEventListener("click", function () {
+    document.getElementById("rangeFilterCountMinProd").value = "";
+    document.getElementById("rangeFilterCountMaxProd").value = "";
+
+    min = undefined;
+    max = undefined;
+
+    showProductsList(currentProductsArray);
+});
+
+/* document.getElementById("sortByPriceDesc").addEventListener("click", function ({
+    
+})); */
