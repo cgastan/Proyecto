@@ -8,7 +8,7 @@ function showProductsList(array) {
     for (let product of array.products) {
         product.cost = parseInt(product.cost);
 
-        if ((min == undefined && max == undefined) || (product.cost >= min && product.cost <= max) || (product.cost >= min && max == undefined) || (min == undefined && product.cost <= max)) {
+        if (!(product.cost < min) && !(product.cost > max)) {
 
             htmlContentToAppend += `
       
@@ -50,6 +50,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
 });
 
 
+
 document.getElementById("rangeFilterCountProd").addEventListener("click", function () {
 
     min = document.getElementById("rangeFilterCountMinProd").value;
@@ -81,6 +82,36 @@ document.getElementById("clearRangeFilterProd").addEventListener("click", functi
     showProductsList(currentProductsArray);
 });
 
-/* document.getElementById("sortByPriceDesc").addEventListener("click", function ({
-    
-})); */
+document.getElementById("sortBySoldCount").addEventListener("click", function () {
+    for (let product of currentProductsArray.products) {
+        currentProductsArray.products.sort(function (a, b) {
+            a.soldCount = parseInt(a.soldCount);
+            b.soldCount = parseInt(b.soldCount);
+            return b.soldCount - a.soldCount;
+
+        })
+    }
+    showProductsList(currentProductsArray);
+});
+
+document.getElementById("sortByPriceDesc").addEventListener("click", function () {
+    for (let product of currentProductsArray.products) {
+        currentProductsArray.products.sort(function (a, b) {
+            a.cost = parseInt(a.cost);
+            b.cost = parseInt(b.cost);
+            return b.cost - a.cost;
+        })
+    }
+    showProductsList(currentProductsArray);
+})
+
+document.getElementById("sortByPriceAsc").addEventListener("click", function () {
+    for (let product of currentProductsArray.products) {
+        currentProductsArray.products.sort(function (a, b) {
+            a.cost = parseInt(a.cost);
+            b.cost = parseInt(b.cost);
+            return a.cost - b.cost;
+        })
+    }
+    showProductsList(currentProductsArray);
+})
