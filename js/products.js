@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
 });
 
 
-
+/*Boton filtrar*/
 document.getElementById("rangeFilterCountProd").addEventListener("click", function () {
 
     min = document.getElementById("rangeFilterCountMinProd").value;
@@ -72,6 +72,8 @@ document.getElementById("rangeFilterCountProd").addEventListener("click", functi
     showProductsList(currentProductsArray);
 });
 
+/*Boton limpiar*/
+
 document.getElementById("clearRangeFilterProd").addEventListener("click", function () {
     document.getElementById("rangeFilterCountMinProd").value = "";
     document.getElementById("rangeFilterCountMaxProd").value = "";
@@ -81,6 +83,8 @@ document.getElementById("clearRangeFilterProd").addEventListener("click", functi
 
     showProductsList(currentProductsArray);
 });
+
+/*Boton relevancia*/
 
 document.getElementById("sortBySoldCount").addEventListener("click", function () {
     for (let product of currentProductsArray.products) {
@@ -94,6 +98,8 @@ document.getElementById("sortBySoldCount").addEventListener("click", function ()
     showProductsList(currentProductsArray);
 });
 
+/*Boton precio desc*/
+
 document.getElementById("sortByPriceDesc").addEventListener("click", function () {
     for (let product of currentProductsArray.products) {
         currentProductsArray.products.sort(function (a, b) {
@@ -105,6 +111,7 @@ document.getElementById("sortByPriceDesc").addEventListener("click", function ()
     showProductsList(currentProductsArray);
 })
 
+/*Boton precio asc*/
 document.getElementById("sortByPriceAsc").addEventListener("click", function () {
     for (let product of currentProductsArray.products) {
         currentProductsArray.products.sort(function (a, b) {
