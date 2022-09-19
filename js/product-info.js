@@ -48,51 +48,53 @@ document.addEventListener("DOMContentLoaded", function (e) {
         }
         htmlContentToAppend += `</div>`
         document.getElementById("divProductInfo").innerHTML = htmlContentToAppend;
+    };
+
+    function showComments(array) {
+        htmlContentToAppend += `
+        <br>
+        <h3 class="p4">Comentarios</h3>
+        <div class="card" >
+        <ul class="list-group">`
+        for (let comment of array) {
+            htmlContentToAppend +=
+                `<li class="list-group-item">
+        <strong>${comment.user}</strong><p class="text-muted">${comment.dateTime}-`; showStarsRate(comment.score); htmlContentToAppend += `</p>
+        <p class="text-muted">${comment.description}</p>
+         </li>`
+            htmlContentToAppend +=
+                `</ul>
+        </div>`
+        }
+        htmlContentToAppend+=`
+        <br>
+        <h3 class="p4">Comentar</h3>
+        <div class="mb-3">
+        <label for="userComment" class="form-label">Tu opinión</label>
+        <textarea name="userComment" class="form-control w-50" id="userComment"rows="5"></textarea>
+        </div>
+        <div class="mb-3">
+        <label for="userScore" class="form-label">Tu puntuación</label>
+        <select class="form-select" id="userScore">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        </select>
+        </div>
+        <button class="btn btn-primary" type="submit" id="enviarComentario">Enviar</button>
+        `
+        document.getElementById("divProductInfo").innerHTML = htmlContentToAppend;
+        /* Parte del desafio para despues
+         document.getElementById("enviarComentario").addEventListener("click",function(){
+            addComment();
+            showComments(commentsInfo); 
+        })*/
     }
 });
 
-function showComments(array) {
-    htmlContentToAppend += `
-    <br>
-    <h3 class="p4">Comentarios</h3>
-    <div class="card" >
-    <ul class="list-group">`
-    for (let comment of array) {
-        htmlContentToAppend +=
-            `<li class="list-group-item">
-    <strong>${comment.user}</strong><p class="text-muted">${comment.dateTime}-`; showStarsRate(comment.score); htmlContentToAppend += `</p>
-    <p class="text-muted">${comment.description}</p>
-     </li>`
-        htmlContentToAppend +=
-            `</ul>
-    </div>`
-    }
-    htmlContentToAppend+=`
-    <br>
-    <h3 class="p4">Comentar</h3>
-    <div class="mb-3">
-    <label for="userComment" class="form-label">Tu opinión</label>
-    <textarea name="userComment" class="form-control w-50" id="userComment"rows="5"></textarea>
-    </div>
-    <div class="mb-3">
-    <label for="userScore" class="form-label">Tu puntuación</label>
-    <select class="form-select" id="userScore">
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    </select>
-    </div>
-    <button class="btn btn-primary" type="submit" id="enviarComentario">Enviar</button>
-    `
-    document.getElementById("divProductInfo").innerHTML = htmlContentToAppend;
-    /* Parte del desafio para despues
-     document.getElementById("enviarComentario").addEventListener("click",function(){
-        addComment();
-        showComments(commentsInfo); 
-    })*/
-}
+
 
 function showStarsRate(scoreNumber) {
     let htmlComments = ``;
