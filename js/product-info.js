@@ -1,11 +1,17 @@
 const CURRENT_PRODUCT_INFO_URL = PRODUCT_INFO_URL.valueOf() + localStorage.getItem("prodID") + ".json";
 const CURRENT_COMMENTS_URL = PRODUCT_INFO_COMMENTS_URL.valueOf() + localStorage.getItem("prodID") + ".json";
-let productInfo= ``
-let commentsInfo=``
+let productInfo = ``
+let commentsInfo = ``
 let htmlContentToAppend = ``
 let htmlComments = ``
+let htmlRelated = "";
 
-document.addEventListener("DOMContentLoaded", function (e) {
+function setProdID(id) {
+    localStorage.setItem("prodID", id);
+    window.location = "product-info.html"
+}
+
+document.addEventListener("DOMContentLoaded", async function (e) {
     getJSONData(CURRENT_PRODUCT_INFO_URL).then(function (resultObj) {
         if (resultObj.status === "ok") {
             productInfo = resultObj.data;
@@ -16,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
             commentsInfo = resultCommentsObj.data;
             showComments(commentsInfo);
         }
-    }));
+    }).then(function (resultObj){showRelatedProds(productInfo)}));
 
     function showProductInfo(array) {
         htmlContentToAppend = `
@@ -66,7 +72,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
                 `</ul>
         </div>`
         }
-        htmlContentToAppend+=`
+        htmlContentToAppend += `
         <br>
         <h3 class="p4">Comentar</h3>
         <div class="mb-3">
@@ -84,8 +90,10 @@ document.addEventListener("DOMContentLoaded", function (e) {
         </select>
         </div>
         <button class="btn btn-primary" type="submit" id="enviarComentario">Enviar</button>
-        `
+        <br>
+        `;
         document.getElementById("divProductInfo").innerHTML = htmlContentToAppend;
+      
         /* Parte del desafio para despues
          document.getElementById("enviarComentario").addEventListener("click",function(){
             addComment();
@@ -106,6 +114,28 @@ function showStarsRate(scoreNumber) {
     }
 
     htmlContentToAppend += htmlComments;
+}
+
+function showRelatedProds(array) {
+    htmlRelated = "";
+    htmlRelated += `
+    <br>
+    <h3 class="p4">Productos relacionados</h3>
+    <div class="row row-cols-1 row-cols-md-4 g-4">`;
+    for (let relatedProd of array.relatedProducts) {
+        htmlRelated += `
+    <div class="col">
+        <div class="card h-80" onclick="setProdID(${relatedProd.id})">
+            <img src="${relatedProd.image}" class="card-img-top">
+                <div class="card-body">
+                    <p class="card-text">${relatedProd.name}</p>
+                </div>
+        </div>
+    </div>
+    `
+    }
+    htmlRelated += `</div>`;
+    document.getElementById("divProductInfo").innerHTML += htmlRelated;
 }
 
 

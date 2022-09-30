@@ -7,44 +7,57 @@ const CART_INFO_URL = "https://japceibal.github.io/emercado-api/user_cart/";
 const CART_BUY_URL = "https://japceibal.github.io/emercado-api/cart/buy.json";
 const EXT_TYPE = ".json";
 
-let showSpinner = function(){
+let showSpinner = function () {
   document.getElementById("spinner-wrapper").style.display = "block";
 }
 
-let hideSpinner = function(){
+let hideSpinner = function () {
   document.getElementById("spinner-wrapper").style.display = "none";
 }
 
-let getJSONData = function(url){
-    let result = {};
-    showSpinner();
-    return fetch(url)
+let getJSONData = function (url) {
+  let result = {};
+  showSpinner();
+  return fetch(url)
     .then(response => {
       if (response.ok) {
         return response.json();
-      }else{
+      } else {
         throw Error(response.statusText);
       }
     })
-    .then(function(response) {
-          result.status = 'ok';
-          result.data = response;
-          hideSpinner();
-          return result;
+    .then(function (response) {
+      result.status = 'ok';
+      result.data = response;
+      hideSpinner();
+      return result;
     })
-    .catch(function(error) {
-        result.status = 'error';
-        result.data = error;
-        hideSpinner();
-        return result;
+    .catch(function (error) {
+      result.status = 'error';
+      result.data = error;
+      hideSpinner();
+      return result;
     });
 }
 
-document.addEventListener("DOMContentLoaded", function(){
-var uMail= localStorage.getItem("usuarioMail");
-  
-    const mailDeUsuario = document.getElementsByClassName("us1");
-for (let i = 0; i < mailDeUsuario.length; i++) {
-  mailDeUsuario[i].innerHTML = uMail;
-}
+document.addEventListener("DOMContentLoaded", function () {
+  var uMail = localStorage.getItem("usuarioMail");
+
+  const mailDeUsuario = document.getElementsByClassName("us1");
+  for (let i = 0; i < mailDeUsuario.length; i++) {
+    mailDeUsuario[i].classList.add("dropdown");
+    mailDeUsuario[i].innerHTML = `
+  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+  ${uMail}
+  </a>
+  <ul class="dropdown-menu dropdown-menu">
+  <li><a class="dropdown-item" href="cart.html">Mi carrito </a></li>
+  <li><a class="dropdown-item" href="my-profile.html">Mi perfil</a></li>
+  <li><a class="dropdown-item" href="index.html" onclick="cerrarSesion()">Cerrar sesión</a></li>
+</ul>`;
+  }
 });
+
+function cerrarSesion(){
+  localStorage.removeItem("usuarioMail");
+}
