@@ -188,3 +188,12 @@ a.custom-card:hover {
 .checked {
   color: orange;
 }
+
+.mini-img{
+  width: 70px;
+}
+
+#countInput{
+  width: 60px;
+  
+}
