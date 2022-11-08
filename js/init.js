@@ -41,8 +41,9 @@ let getJSONData = function (url) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  var uMail = localStorage.getItem("usuarioMail");
-
+  let perfil1 = window.localStorage.getItem("usuario");
+let perfilObject= JSON.parse(perfil1);
+ let uMail=perfilObject.mail;
   const mailDeUsuario = document.getElementsByClassName("us1");
   for (let i = 0; i < mailDeUsuario.length; i++) {
     mailDeUsuario[i].classList.add("dropdown");
@@ -59,5 +60,5 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function cerrarSesion(){
-  localStorage.removeItem("usuarioMail");
+  localStorage.removeItem("usuario");
 }
